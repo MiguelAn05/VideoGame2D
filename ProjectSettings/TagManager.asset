@@ -8,10 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - objects
   - Water
   - UI
-  - 
+  - Terrain
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Terreno
+    uniqueID: 3398619601
+    locked: 0
+  - name: objetos
+    uniqueID: 3761130273
+    locked: 0
+  - name: Personaje
+    uniqueID: 1703335967
     locked: 0
