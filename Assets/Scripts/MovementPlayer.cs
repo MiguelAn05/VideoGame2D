@@ -11,7 +11,15 @@ public class MovementPlayer : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 velocidad = Vector3.zero;
     private bool mirandoDerecha = true;
-    public float walk;
+    public float fuerzaDeSalto;
+    public LayerMask suelo;
+    public Transform controladorSuelo;
+    public Vector3 dimensionesCaja;
+    private bool floor;
+    private bool salto = false;
+    public float distanciaAlSuelo = 0.1f;
+
+
 
     private void Start()
     {
@@ -23,23 +31,38 @@ public class MovementPlayer : MonoBehaviour
     {
         movimientoHorizontal = Input.GetAxisRaw("Horizontal")*speed;
         animator.SetFloat("speed",speed);
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            salto = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        Mover(movimientoHorizontal * Time.fixedDeltaTime);
-        if (Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.A))
         {
-            animator.SetBool("Walking", true);
+            floor = Physics2D.Raycast(controladorSuelo.position, -Vector2.up, distanciaAlSuelo, suelo);
+
+            Mover(movimientoHorizontal * Time.fixedDeltaTime, salto);
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+            {
+                animator.SetBool("Walking", true);
+            }
+            else
+            {
+                animator.SetBool("Walking", false);
+            }
         }
-        else
-        {
-            animator.SetBool("Walking", false);
-        }
-           
+
+
     }
 
-    private void Mover(float mover) {
+
+    
+    
+
+
+    private void Mover(float mover,bool saltar) {
         Vector3 velocidadObjetivo = new Vector2(mover, rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, velocidadObjetivo, ref velocidad, suavizadoMovimiento);
 
@@ -51,6 +74,13 @@ public class MovementPlayer : MonoBehaviour
         else if(mover < 0 && mirandoDerecha)
         {
             Girar();
+        }
+
+        if(floor && saltar)
+        {
+            floor = false;
+            rb.AddForce(new Vector2(0f, fuerzaDeSalto));
+            salto = false;
         }
     }
 
