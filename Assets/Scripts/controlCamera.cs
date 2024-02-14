@@ -8,10 +8,7 @@ public class controlCamera : MonoBehaviour
     private Vector3 posicion;
     public float adelante;
     public float Smoothing;
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()

@@ -55,6 +55,17 @@ public class MovementPlayer : MonoBehaviour
         }
 
 
+        if (Input.GetKey(KeyCode.W))
+        {
+            animator.SetBool("Jump", true);
+        }
+        else
+        {
+            animator.SetBool("Jump", false);
+        }
+
+
+
     }
 
 
