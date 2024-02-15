@@ -54,6 +54,8 @@ public class MovementPlayer : MonoBehaviour
             }
         }
 
+        
+    
 
         if (Input.GetKey(KeyCode.W))
         {

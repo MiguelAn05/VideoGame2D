@@ -41,7 +41,7 @@ public class combat : MonoBehaviour
 
     private void Golpe()
     {
-        animator.SetBool("Atack1",true);
+        animator.SetTrigger("Atack1");
 
         Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpe.position, radioGolpe);
 
