@@ -10,14 +10,15 @@ public class MovementEnemy : MonoBehaviour
     
     public float tiempoCambio;
     private float tiempoRestante;
-
-
+    private bool mirandoDerecha = true;
+    public Transform jugador;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         tiempoRestante = tiempoCambio;
+        jugador = GameObject.FindGameObjectWithTag("player").GetComponent<Transform>();
     }
 
     private void Update()
@@ -39,6 +40,13 @@ public class MovementEnemy : MonoBehaviour
     }
 
     
-
+    public void MirarJugador()
+    {
+        if ((jugador.position.x > transform.position.x && !mirandoDerecha) || (jugador.position.x < transform.position.x && mirandoDerecha))
+        {
+            mirandoDerecha = !mirandoDerecha;
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+        }
+    }
 
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class combat : MonoBehaviour
 {
+    public float vida;
     public Transform controladorGolpe;
     public float radioGolpe;
     public float dañoGolpe;
@@ -37,7 +38,14 @@ public class combat : MonoBehaviour
 
 
 
-
+    public void DamagePlayer(float damage)
+    {
+        vida -= damage;
+        if(vida <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Golpe()
     {
