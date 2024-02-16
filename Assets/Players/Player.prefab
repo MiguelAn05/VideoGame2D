@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6646237681737042339}
   - component: {fileID: 1065999264389488426}
   - component: {fileID: 7002414358457516757}
+  - component: {fileID: 6172681712439683040}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -222,6 +223,21 @@ MonoBehaviour:
   "da\xF1oGolpe": 20
   tiempoEntreAtaques: 1
   tiempoSiguienteAtaque: 0
+--- !u!114 &6172681712439683040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3370055551888475869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e02fb31307a240fd9eed0716f94414b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vida: 0
+  maximoVida: 100
+  barraDeVida: {fileID: 0}
 --- !u!1 &3955250954823310387
 GameObject:
   m_ObjectHideFlags: 0

@@ -209,4 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadMovimiento: 2
   distancia: 2
-  tiempoCambio: 3
+  tiempoCambio: 7.16
+  jugador: {fileID: 268530066953797139, guid: 14ba0036a41584dc09e073eb849f7f0a, type: 3}
+  attackRange: 1
+  followRange: 5

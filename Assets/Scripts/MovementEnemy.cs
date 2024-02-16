@@ -4,49 +4,73 @@ using UnityEngine;
 
 public class MovementEnemy : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    public float velocidadMovimiento;
-    public float distancia;
-    
-    public float tiempoCambio;
-    private float tiempoRestante;
-    private bool mirandoDerecha = true;
-    public Transform jugador;
 
+
+    public Transform controladorGolpe;
+    public float radioGolpe;
+    public float damage;
+    public float tiempoEntreAtaques;
+    public float tiempoSiguienteAtaque;
+    public Transform player; // referencia al jugador
+
+    private Animator animator;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        tiempoRestante = tiempoCambio;
-        jugador = GameObject.FindGameObjectWithTag("player").GetComponent<Transform>();
+        animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
     {
-        rb.velocity = new Vector2(velocidadMovimiento * transform.right.x, rb.velocity.y);
-
-        tiempoRestante -= Time.deltaTime;
-
-        if (tiempoRestante <= 0) 
+        if (tiempoEntreAtaques > 0)
         {
-            Girar();
-            tiempoRestante = tiempoCambio;
+            tiempoSiguienteAtaque -= Time.deltaTime;
+        }
+
+        // Verificar la distancia entre el enemigo y el jugador
+        if (Vector2.Distance(transform.position, player.position) <= radioGolpe)
+        {
+            // Si el tiempo entre ataques ha pasado, ataca al jugador
+            if (tiempoSiguienteAtaque <= 0)
+            {
+                Golpe();
+                tiempoSiguienteAtaque = tiempoEntreAtaques;
+            }
         }
     }
 
-    void Girar()
+    private void Golpe()
     {
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+        animator.SetTrigger("AtackEnemy1");
+
+        Collider2D[] objetos = Physics2D.OverlapCircleAll(controladorGolpe.position, radioGolpe);
+
+        foreach (Collider2D colisionador in objetos)
+        {
+            if (colisionador.CompareTag("Player"))
+            {
+                colisionador.transform.GetComponent<VidaPlayer>().TakeDamage(damage);
+            }
+        }
     }
 
-    
-    public void MirarJugador()
+    private void OnDrawGizmos()
     {
-        if ((jugador.position.x > transform.position.x && !mirandoDerecha) || (jugador.position.x < transform.position.x && mirandoDerecha))
-        {
-            mirandoDerecha = !mirandoDerecha;
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(controladorGolpe.position, radioGolpe);
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
