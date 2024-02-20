@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ZonaMuerte : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class ZonaMuerte : MonoBehaviour
         {
             animator.SetTrigger("Death");
             Debug.Log("muerte");
+            SceneManager.LoadScene("GameOver");
         }
         
     }

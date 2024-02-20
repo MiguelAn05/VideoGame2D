@@ -22,6 +22,6 @@ public class Puntaje : MonoBehaviour
 
     public void SumarPuntos(float puntosEntrada)
     {
-        puntos = +puntosEntrada;
+        puntos +=puntosEntrada;
     }
 }
